@@ -9,7 +9,7 @@ input[type=text], input[type=password], input[type=email], input[type=date], inp
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  background: #F0FFF0;
+  background: grey;
   border-radius: 10px;
 
 }
@@ -21,9 +21,9 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 .button {
-  background-color:  #4CAF50 ;
+  background-color: blue;
   border: none;
-  color: white;
+  color: grey;
   padding: 10px 15px;
   text-align: center;
   text-decoration: none;
