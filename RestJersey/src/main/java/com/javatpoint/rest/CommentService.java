@@ -3,9 +3,9 @@ package com.javatpoint.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -47,35 +47,30 @@ public class CommentService {
 	
 	 @GET
 	 @Path("/getcomments")
-	 //@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	 @Produces(MediaType.APPLICATION_JSON)
-	 public String getcomments(@QueryParam("name") String username,
-	 @QueryParam("comments") String comments) {
-	   Gson gsonBuilder = new GsonBuilder().create();
-		List<String> flag=new ArrayList<String>();
+	 public String getcomments(@QueryParam("cmnt") String username) {
+	  Gson gsonBuilder = new GsonBuilder().create();
+	  List<String> flag=new ArrayList<String>();
 		String jsonFromJavaArrayList=null;
 		try {
-		String[] data= {username,comments};
+			System.out.println(username);
+
+		String[] data= {username};
+		
 		DbConnection dbConnect=new DbConnection();
 		CommentHandler commentHandle=new CommentHandler();
-		flag= commentHandle.RetrieveComment(dbConnect.getConnection(), data, username,comments);
+		flag= commentHandle.RetrieveComment(dbConnect.getConnection(), data, username);
 		jsonFromJavaArrayList = gsonBuilder.toJson(flag);
 //		System.out.println(jsonFromJavaArrayList);
-		
-
 		} 
 		
 		catch(Exception e) {
 			
 		System.out.println("Comment Service Error found : "+e.getMessage());
-			
 			}
 	
 		return jsonFromJavaArrayList;
 	
-	
-	
-	
-	
 	}
+	
 }
