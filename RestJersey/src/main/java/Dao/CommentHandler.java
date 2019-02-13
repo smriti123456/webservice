@@ -23,7 +23,7 @@ public class CommentHandler {
 			
 			} catch (Exception e) {
 
-				System.out.println("Sign Up Handler Error found : "+e.getMessage());
+				System.out.println("Comment Handler Error found : "+e.getMessage());
 				throw e;
 			}
 		 return comm;
@@ -32,36 +32,30 @@ public class CommentHandler {
 		}
 
 	
-	
-	
-	
-public List<String> RetrieveComment(Connection dbConnect, String[] data, String username , String comments) throws Exception {
+ public List<String> RetrieveComment(Connection dbConnect, String[] data, String username) throws Exception {
 		
        List<String> usercommentlist = new ArrayList<String>();
 		try {
 			System.out.println(data[0]);
-			PreparedStatement ps = dbConnect.prepareStatement("INSERT INTO usercomments values ( '"+data[0]+"', '"+data[1]+"');");
-		
-			ps.executeUpdate();
+
 			 
-			PreparedStatement ds=dbConnect.prepareStatement("select username ,comments from usercomments where username='"+username+"';"); 
+			PreparedStatement ds=dbConnect.prepareStatement("select comments from usercomments where username='"+username+"';"); 
 			ResultSet rs=ds.executeQuery();
+			
+
 			while(rs.next()) {
-				usercommentlist.add(rs.getString(username));
-				usercommentlist.add(rs.getString(comments));
+				
+				usercommentlist.add(rs.getString("comments"));
 			
 			}
 		}
 			
 			catch (Exception e) {
-
-				System.out.println("Sign Up Handler Error found : "+e.getMessage());
+				System.out.println("Handler Error found : "+e.getMessage());
 				throw e;
 			}
 		 return usercommentlist;
 
 		
-		}
 }
-
-
+}
